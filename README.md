@@ -13,6 +13,7 @@ This project implements a mission control system for NASA's Mars Rovers, allowin
 
 ## 🏗️ Project Structure
 
+```
 mars-rover/
 ├── backend/ # Node.js/Express API server
 │ ├── src/
@@ -34,6 +35,7 @@ mars-rover/
 │ └── package.json
 │
 └── README.md # This file
+```
 
 ## 🛠️ Technology Stack
 

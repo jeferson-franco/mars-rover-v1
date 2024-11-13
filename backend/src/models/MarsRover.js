@@ -1,4 +1,4 @@
-const { GridValidator } = require('../utils/GridValidator');
+const GridValidator = require('../utils/GridValidator');
 
 class MarsRover {
   constructor(x, y, direction) {
@@ -113,4 +113,4 @@ class MarsRover {
   }
 }
 
-module.exports = { MarsRover };
+module.exports = MarsRover;

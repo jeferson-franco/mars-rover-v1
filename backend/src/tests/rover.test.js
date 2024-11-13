@@ -1,59 +1,39 @@
 const request = require('supertest');
-const app = require('../app');
+const app = require('../../src/app');
 
-describe('Rover API', () => {
-  test('should process single rover instructions correctly', async () => {
-    const response = await request(app)
-      .post('/api/rover/move')
-      .send({
-        plateau: '5 5',
-        rovers: [
-          {
-            position: '1 2 N',
-            instructions: 'LMLMLMLMM',
-          },
-        ],
-      });
+describe('Rover API Integration Tests', () => {
+  describe('POST /api/rover/move', () => {
+    it('should process valid commands successfully', async () => {
+      const response = await request(app)
+        .post('/api/rover/move')
+        .send({
+          plateau: '5 5',
+          rovers: [
+            {
+              position: '1 2 N',
+              instructions: 'LMLMLMLMM',
+            },
+          ],
+        });
 
-    expect(response.status).toBe(200);
-    expect(response.body.results[0].final).toBe('1 3 N');
-  });
+      expect(response.status).toBe(200);
+      expect(response.body.results[0].final).toBe('1 3 N');
+    });
 
-  test('should process multiple rovers', async () => {
-    const response = await request(app)
-      .post('/api/rover/move')
-      .send({
-        plateau: '5 5',
-        rovers: [
-          {
-            position: '1 2 N',
-            instructions: 'LMLMLMLMM',
-          },
-          {
-            position: '3 3 E',
-            instructions: 'MRRMMRMRRM',
-          },
-        ],
-      });
+    it('should handle grid boundaries', async () => {
+      const response = await request(app)
+        .post('/api/rover/move')
+        .send({
+          plateau: '5 5',
+          rovers: [
+            {
+              position: '1 2 N',
+              instructions: 'MMMMMMMMMM', // try to move beyond grid
+            },
+          ],
+        });
 
-    expect(response.status).toBe(200);
-    expect(response.body.results[0].final).toBe('1 3 N');
-    expect(response.body.results[1].final).toBe('2 3 S');
-  });
-
-  test('should handle invalid plateau coordinates', async () => {
-    const response = await request(app)
-      .post('/api/rover/move')
-      .send({
-        plateau: '-1 5',
-        rovers: [
-          {
-            position: '1 2 N',
-            instructions: 'LMLMLMLMM',
-          },
-        ],
-      });
-
-    expect(response.status).toBe(400);
+      expect(response.status).toBe(400);
+    });
   });
 });

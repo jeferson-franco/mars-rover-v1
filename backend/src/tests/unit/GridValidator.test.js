@@ -1,4 +1,4 @@
-const { GridValidator } = require('../../../src/utils/GridValidator');
+const GridValidator = require('../../utils/GridValidator');
 
 describe('GridValidator Tests', () => {
   const validator = new GridValidator(10, 10);

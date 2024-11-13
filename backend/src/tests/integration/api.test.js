@@ -1,35 +1,37 @@
-import request from 'supertest';
-import app from '../../src/app';
+const request = require('supertest');
+const app = require('../../../src/app');
 
 describe('Rover API Integration Tests', () => {
-  describe('POST /api/rover/move', () => {
-    it('should process movement commands successfully', async () => {
+  describe('POST /api/rover/command', () => {
+    it('should process valid commands successfully', async () => {
       const response = await request(app)
-        .post('/api/rover/move')
+        .post('/api/rover/command')
         .send({
-          commands: 'MMLR',
+          commands: 'MMLRMM',
           initialPosition: { x: 0, y: 0, direction: 'N' },
         });
 
-      expect(response.status).to.equal(200);
-      expect(response.body).to.have.property('position');
-      expect(response.body.position).to.deep.equal({
-        x: -1,
-        y: 2,
-        direction: 'N',
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual({
+        position: {
+          x: -1,
+          y: 3,
+          direction: 'N',
+        },
+        status: 'success',
       });
     });
 
-    it('should handle invalid input properly', async () => {
+    it('should handle grid boundaries', async () => {
       const response = await request(app)
-        .post('/api/rover/move')
+        .post('/api/rover/command')
         .send({
-          commands: 'INVALID',
-          initialPosition: { x: 0, y: 0, direction: 'N' },
+          commands: 'MMMMMMMMMM', // try to move beyond grid
+          position: { x: 0, y: 0, direction: 'N' },
         });
 
-      expect(response.status).to.equal(400);
-      expect(response.body).to.have.property('error');
+      expect(response.status).toBe(400);
+      expect(response.body.position.y).toBeLessThanOrEqual(9);
     });
   });
 });

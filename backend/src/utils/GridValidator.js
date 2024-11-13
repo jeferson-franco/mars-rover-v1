@@ -13,4 +13,4 @@ class GridValidator {
   }
 }
 
-module.exports = { GridValidator };
+module.exports = GridValidator;

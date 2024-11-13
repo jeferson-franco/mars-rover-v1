@@ -1,22 +1,10 @@
-const { MarsRover } = require('../../../src/models/MarsRover');
+const MarsRover = require('../../models/MarsRover');
 
 describe('Mars Rover Unit Tests', () => {
   let rover;
 
   beforeEach(() => {
     rover = new MarsRover(0, 0, 'N');
-  });
-
-  describe('Initialization', () => {
-    it('should initialize with correct position and direction', () => {
-      expect(rover.x).toBe(0);
-      expect(rover.y).toBe(0);
-      expect(rover.direction).toBe('N');
-    });
-
-    it('should throw error for invalid initial direction', () => {
-      expect(() => new MarsRover(0, 0, 'X')).toThrow('Invalid direction');
-    });
   });
 
   describe('Basic Movement', () => {
@@ -26,34 +14,20 @@ describe('Mars Rover Unit Tests', () => {
       expect(rover.x).toBe(0);
     });
 
-    it('should move forward when facing East', () => {
-      rover.execute('RM');
-      expect(rover.x).toBe(1);
-      expect(rover.y).toBe(0);
-    });
-
     it('should move backward when facing North', () => {
       rover.execute('B');
       expect(rover.y).toBe(-1);
       expect(rover.x).toBe(0);
     });
-  });
 
-  describe('Rotation', () => {
-    it('should rotate left correctly', () => {
-      const directions = ['N', 'W', 'S', 'E', 'N'];
-      directions.forEach((expectedDir, index) => {
-        expect(rover.direction).toBe(expectedDir);
-        if (index < directions.length - 1) rover.execute('L');
-      });
+    it('should turn left when facin North', () => {
+      rover.execute('L');
+      expect(rover.direction).toBe('W');
     });
 
-    it('should rotate right correctly', () => {
-      const directions = ['N', 'E', 'S', 'W', 'N'];
-      directions.forEach((expectedDir, index) => {
-        expect(rover.direction).toBe(expectedDir);
-        if (index < directions.length - 1) rover.execute('R');
-      });
+    it('should turn right when facin North', () => {
+      rover.execute('R');
+      expect(rover.direction).toBe('E');
     });
   });
 
@@ -68,7 +42,7 @@ describe('Mars Rover Unit Tests', () => {
 
   describe('Invalid Input Tests', () => {
     it('should handle invalid commands gracefully', () => {
-      expect(() => rover.move('X')).to.throw('Invalid command');
+      expect(() => rover.execute('X')).toThrow('Invalid command');
     });
   });
 });

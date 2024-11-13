@@ -13,7 +13,7 @@ npm install express cors dotenv nodemon jest supertest
 
 create rover logic (backend/src/services/RoverService.js)
 
-create express server (backend/src/server.js)
+create express app (backend/src/app.js)
 
 create test file (backend/src/tests/rover.test.js)
 
@@ -21,8 +21,8 @@ to run backend:
 
 ```bash
 # Add to package.json scripts:
-# "start": "node src/server.js",
-# "dev": "nodemon src/server.js",
+# "start": "node src/app.js",
+# "dev": "nodemon src/app.js",
 # "test": "jest"
 
 npm run dev

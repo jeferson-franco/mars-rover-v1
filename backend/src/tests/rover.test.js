@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../server');
+const app = require('../app');
 
 describe('Rover API', () => {
   test('should process single rover instructions correctly', async () => {

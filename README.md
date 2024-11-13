@@ -19,7 +19,7 @@ mars-rover/
 │ ├── src/
 │ │ ├── services/ # Business logic (RoverService)
 │ │ ├── tests/ # Unit tests
-│ │ └── server.js # Express application
+│ │ └── app.js # Express application
 │ └── package.json
 │
 ├── frontend/ # Vue.js client application

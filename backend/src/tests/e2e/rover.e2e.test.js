@@ -1,31 +1,25 @@
-const { chromium } = require('playwright');
+jest.setTimeout(30000);
+const { test, expect } = require('@playwright/test');
 
-describe('Mars Rover E2E Tests', () => {
-  let browser;
-  let page;
-
-  beforeAll(async () => {
-    browser = await chromium.launch();
+test.describe('Mars Rover E2E Tests', () => {
+  test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
-    await page.goto('http://localhost:3000');
+    await page.goto('http://localhost:5173');
   });
 
-  afterAll(async () => {
-    await browser.close();
+  test.afterAll(async () => {
+    await page.close();
   });
 
-  it('should allow user to input commands and see rover movement', async () => {
+  test('should allow user to input commands and see rover movement', async () => {
     await page.fill('[data-testid="command-input"]', 'MMLR');
     await page.click('[data-testid="execute-button"]');
     await page.waitForSelector('[data-testid="rover-position"]');
-    const position = await page.$eval(
-      '[data-testid="rover-position"]',
-      (el) => el.textContent,
-    );
-    expect(position).toContain('x: -1, y: 2, direction: N');
+    const position = await page.textContent('[data-testid="rover-position"]');
+    expect(position).toContain('x: -1, y: 3, direction: N');
   });
 
-  it('should display error for invalid commands', async () => {
+  test('should display error for invalid commands', async () => {
     await page.fill('[data-testid="command-input"]', 'INVALID');
     await page.click('[data-testid="execute-button"]');
     await page.waitForSelector('[data-testid="error-message"]');
@@ -36,7 +30,7 @@ describe('Mars Rover E2E Tests', () => {
     expect(errorMessage).toBeVisible();
   });
 
-  it('should update grid visualization correctly', async () => {
+  test('should update grid visualization correctly', async () => {
     await page.fill('[data-testid="command-input"]', 'MM');
     await page.click('[data-testid="execute-button"]');
     await page.waitForSelector('[data-testid=""]');

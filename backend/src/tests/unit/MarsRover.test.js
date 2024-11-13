@@ -14,12 +14,6 @@ describe('Mars Rover Unit Tests', () => {
       expect(rover.x).toBe(0);
     });
 
-    it('should move backward when facing North', () => {
-      rover.execute('B');
-      expect(rover.y).toBe(-1);
-      expect(rover.x).toBe(0);
-    });
-
     it('should turn left when facin North', () => {
       rover.execute('L');
       expect(rover.direction).toBe('W');
@@ -34,8 +28,8 @@ describe('Mars Rover Unit Tests', () => {
   describe('Complex Commands', () => {
     it('should handle multiple commands', () => {
       rover.execute('MMLRMM');
-      expect(rover.x).toBe(-1);
-      expect(rover.y).toBe(3);
+      expect(rover.x).toBe(0);
+      expect(rover.y).toBe(4);
       expect(rover.direction).toBe('N');
     });
   });

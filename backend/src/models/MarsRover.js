@@ -29,9 +29,6 @@ class MarsRover {
       case 'M':
         this.moveForward();
         break;
-      case 'B':
-        this.moveBackward();
-        break;
       case 'L':
         this.rotateLeft();
         break;
@@ -59,30 +56,6 @@ class MarsRover {
         break;
       case 'W':
         newX--;
-        break;
-    }
-
-    if (this.validator.isValidPosition(newX, newY)) {
-      this.x = newX;
-      this.y = newY;
-    }
-  }
-
-  moveBackward() {
-    let newX = this.x;
-    let newY = this.y;
-    switch (this.direction) {
-      case 'N':
-        newY--;
-        break;
-      case 'S':
-        newY++;
-        break;
-      case 'E':
-        newX--;
-        break;
-      case 'W':
-        newX++;
         break;
     }
 

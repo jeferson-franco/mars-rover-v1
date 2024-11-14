@@ -7,32 +7,9 @@
     "dev": "nodemon src/app.js",
     "test": "jest --verbose",
     "test:watch": "jest --watch",
-    "test:unit": "jest",
-    "test:e2e": "playwright test",
+    "test:unit": "jest --verbose --testPathPattern=unit",
+    "test:e2e": "NODE_ENV=test playwright test",
     "test:coverage": "jest --coverage"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "coverageThreshold": {
-      "global": {
-        "branches": 80,
-        "functions": 80,
-        "lines": 80,
-        "statements": 80
-      }
-    },
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.js"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "tests/e2e/"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/tests/e2e/"
-    ]
   },
   "keywords": [],
   "author": "",

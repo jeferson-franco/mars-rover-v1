@@ -1,7 +1,8 @@
-jest.setTimeout(30000);
 const { test, expect } = require('@playwright/test');
 
 test.describe('Mars Rover E2E Tests', () => {
+  let page;
+
   test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
     await page.goto('http://localhost:5173');

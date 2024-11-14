@@ -22,6 +22,8 @@ app.post('/api/rover/move', (req, res) => {
       return res.status(400).json({ error: 'Invalid plateau coordinates' });
     }
 
+    let hasError = false;
+
     const results = rovers.map((rover) => {
       try {
         return {
@@ -35,6 +37,7 @@ app.post('/api/rover/move', (req, res) => {
           ),
         };
       } catch (error) {
+        hasError = true;
         return {
           initial: rover.position,
           instructions: rover.instructions,
@@ -43,7 +46,11 @@ app.post('/api/rover/move', (req, res) => {
       }
     });
 
-    res.json({ results });
+    if (hasError) {
+      return res.status(400).json({ results });
+    } else {
+      return res.status(200).json({ results });
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

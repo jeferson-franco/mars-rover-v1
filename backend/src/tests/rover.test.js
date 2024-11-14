@@ -34,7 +34,7 @@ describe('Rover API Integration Tests', () => {
           ],
         });
 
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(400);
     });
   });
 });

@@ -21,9 +21,13 @@
         "statements": 80
       }
     },
+    "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/**/*.js",
-      "!src/app.js"
+      "src/**/*.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "tests/e2e/"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",

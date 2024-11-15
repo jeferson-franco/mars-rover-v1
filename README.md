@@ -1,6 +1,6 @@
 # Mars Rover Mission Control System
 
-A NASA Mars Rover mission control system that allows operators to navigate multiple rovers on a Martian plateau through a user-friendly web interface.
+A NASA Mars Rover mission control system allowing operators to navigate multiple rovers on a Martian plateau through a user-friendly web interface.
 
 ## 🚀 Project Overview
 
@@ -13,7 +13,7 @@ This project implements a mission control system for NASA's Mars Rovers, allowin
 
 ## 🏗️ Project Structure
 
-```
+```stylus
 mars-rover-v1/
 ├── backend/             # Node.js/Express API server
 │   ├── src/
@@ -26,8 +26,8 @@ mars-rover-v1/
 │   │   ├── integration/
 │   │   └── e2e/
 │   ├── jest.config.js
-│   ├── playwright.config.js
-│   └── package.json
+│   ├── package.json
+│   └── Dockerfile.backend
 │
 ├── frontend/            # Vue.js client application
 │   ├── src/
@@ -39,11 +39,10 @@ mars-rover-v1/
 │   │   │   └── roverStore.js
 │   │   ├── App.vue
 │   │   └── main.js
-│   └── package.json
+│   ├── package.json
+│   └── Dockerfile.frontend
 │
 ├── docker-compose.yml
-├── Dockerfile.backend
-├── Dockerfile.frontend
 └── README.md            # This file
 ```
 
@@ -54,11 +53,11 @@ mars-rover-v1/
 - Node.js with Express
 - Jest and Playwright for testing
 - Cors for cross-origin resource sharing
-- MongoDB/MySQL for data storage (optional)
 
 ### Frontend
 
 - Vue.js 3
+- Vite for development server and build tool
 - Axios for API communication
 - Vuex for state management
 
@@ -71,7 +70,6 @@ mars-rover-v1/
 ### Prerequisites
 
 - Docker and Docker Compose installed on your machine
-- Node.js (v14 or higher) and npm (v6 or higher) if running without Docker
 
 ### Running the Application with Docker
 
@@ -95,6 +93,8 @@ This command will build and start both the backend and frontend containers.
 - Frontend: http://localhost:5173
 - Backend API: http://localhost:3000
 
+**Note:** During development, you may need to refresh the page if the frontend hasn't fully loaded yet.
+
 ### Running the Application Without Docker
 
 #### Backend Setup
@@ -103,7 +103,7 @@ This command will build and start both the backend and frontend containers.
 2. Install dependencies (npm install)
 3. Start the backend server (npm run dev)
 
-The backend server will run on http://localhost:3000
+The backend server will run at http://localhost:3000.
 
 #### Frontend Setup
 
@@ -111,7 +111,7 @@ The backend server will run on http://localhost:3000
 2. Install dependencies (npm install)
 3. Start the frontend application (npm run dev)
 
-The frontend application will run on http://localhost:5173
+The frontend application will run at http://localhost:5173.
 
 ## 📡 API Endpoints
 
@@ -158,13 +158,13 @@ Response:
 
 ## 🎮 Usage Instructions
 
-1. Start the application (using Docker or manually as described above).
-2. Access the frontend application in your browser at http://localhost:5173.
-3. Define the plateau size (e.g., "5 5") via the user interface.
-4. Add multiple rovers by providing:
-   -- Initial position (e.g., "1 2 N")
-   -- Movement instructions (e.g., "LMLMLMLMM")
-5. Submit the commands to see the rovers' final positions and visualize their movements on the plateau grid.
+1. **Start the application** (using Docker or manually as described above).
+2. **Access the frontend application** in your browser at http://localhost:5173.
+3. **Define the plateau size** (e.g., "5 5") via the user interface.
+4. **Add multiple rovers** by providing:
+   -- **Initial position** (e.g., "1 2 N")
+   -- **Movement instructions** (e.g., "LMLMLMLMM")
+5. **Submit the commands** to see the rovers' final positions and visualize their movements on the plateau grid.
 
 ## 🧪 Testing
 
@@ -180,20 +180,24 @@ npm test
 
 # Run tests with coverage report
 npm run test:coverage
-
-# Run end-to-end tests
-npm run test:e2e
 ```
 
 The test suite includes:
 
 - Unit tests for models, services, and utilities
 - API integration tests
-- End-to-end tests using Playwright
+
+### End-to-End Tests
+
+Ensure the backend and frontend are running.
+
+```bash
+npm run test:e2e
+```
 
 ### Frontend Tests
 
-(WIP: Instructions for frontend tests, if implemented)
+**Note:** Frontend testing setup is in progress and will be updated soon.
 
 ## 📝 Command Reference
 
@@ -218,11 +222,6 @@ Cardinal Directions:
 - **Visualization**: The frontend visualizes rover movements and final positions on the plateau grid.
 - **Dockerization**: The entire project is containerized using Docker, facilitating easy deployment.
 
-## 💾 Data Storage (Bonus)
-
-- **Database Integration**: The application can be configured to use MongoDB or MySQL for storing rover data.
-- **Setup Instructions**: (WIP: Include instructions on how to set up and configure the database.)
-
 ## 👥 Contributing
 
 1. Fork the repository
@@ -235,4 +234,15 @@ Cardinal Directions:
 
 For questions and support, contact:
 
-- Email: jefersonfranco@pm.me
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-jefersonfranco-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/jefersonfranco/)
+[![Email](https://img.shields.io/badge/Email-jefersonfranco%40protonmail.com-red?style=flat-square&logo=gmail)](mailto:jefersonfranco@protonmail.com)
+
+<div align="center">
+
+_This document is continuously updated to reflect new developments and achievements._
+
+</div>
+
+## Keywords
+
+`#WebDevelopment` `#MarsRover` `#FullStack` `#Node` `#Express` `#Cors` `#Jest` `#Playwright` `#Vue` `#Vite` `#Axios` `#Vuex` `#Docker` `#DockerCompose`

@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../../app');
+const app = require('../../src/app');
 
 describe('Rover API Integration Tests', () => {
   describe('POST /api/rover/move', () => {
@@ -10,12 +10,8 @@ describe('Rover API Integration Tests', () => {
           plateau: '5 5',
           rovers: [
             {
-              position: '1 2 N',
-              instructions: 'LMLMLMLMM',
-            },
-            {
-              position: '3 3 E',
-              instructions: 'MMRMMRMRRM',
+              position: '0 0 N',
+              instructions: 'MMLRMM',
             },
           ],
         });
@@ -24,14 +20,9 @@ describe('Rover API Integration Tests', () => {
       expect(response.body).toEqual({
         results: [
           {
-            initial: '1 2 N',
-            instructions: 'LMLMLMLMM',
-            final: '1 3 N',
-          },
-          {
-            initial: '3 3 E',
-            instructions: 'MMRMMRMRRM',
-            final: '5 1 E',
+            initial: '0 0 N',
+            instructions: 'MMLRMM',
+            final: '0 4 N',
           },
         ],
       });
@@ -44,7 +35,7 @@ describe('Rover API Integration Tests', () => {
           plateau: '5 5',
           rovers: [
             {
-              position: '1 2 N',
+              position: '0 0 N',
               instructions: 'MMMMMMMMMM', // try to move beyond grid
             },
           ],
@@ -54,7 +45,7 @@ describe('Rover API Integration Tests', () => {
       expect(response.body).toEqual({
         results: [
           {
-            initial: '1 2 N',
+            initial: '0 0 N',
             instructions: 'MMMMMMMMMM',
             error: 'Movement would place rover outside plateau',
           },

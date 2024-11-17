@@ -1,4 +1,4 @@
-const MarsRover = require('../../models/MarsRover');
+const MarsRover = require('../../src/models/MarsRover');
 
 describe('Mars Rover Unit Tests', () => {
   let rover;

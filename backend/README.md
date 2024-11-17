@@ -75,3 +75,120 @@ Refer the the main README or the API documentation for endpoint details.
 ## Contributing
 
 Contributions are welcome! Please follow the guidelines in the main README.
+
+## DIY
+
+1. Make sure you have Node.js (v14 or higher) and npm (v6 or higher) installed on your machine. You can check the installed versions by running:
+
+```
+node --version
+npm --version
+```
+
+2. Create a new directory for your backend project and navigate into it:
+
+```
+mkdir mars-rover-backend
+cd mars-rover-backend
+```
+
+3. Initialize a new Node.js project:
+
+```
+npm init -y
+```
+
+4. Install the required dependencies one by one using npm:
+
+```
+npm install express
+npm install cors
+npm install dotenv
+npm install nodemon
+npm install jest --save-dev
+npm install supertest --save-dev
+npm install playwright --save-dev
+```
+
+5. Create the necessary directories and files for your project structure:
+
+```
+backend/
+├── src/
+│   ├── app.js
+│   ├── models/
+│   ├── services/
+│   └── utils/
+├── tests/
+│   ├── unit/
+│   ├── integration/
+│   └── e2e/
+├── jest.config.js
+├── playwright.config.js
+├── package.json
+└── Dockerfile
+```
+
+> My jest.config.js is like this (can vary):
+
+```
+module.exports = {
+  testEnvironment: 'node',
+  testMatch: [
+    '**/tests/unit/**/*.test.js',
+    '**/tests/integration/**/*.test.js',
+  ],
+  collectCoverage: true,
+  collectCoverageFrom: ['src/**/*.js'],
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
+  coveragePathIgnorePatterns: ['/node_modules/'],
+  testPathIgnorePatterns: ['/node_modules/', '/tests/e2e/'],
+};
+```
+
+> My playwright.config.js is like this (can vary):
+
+```
+module.exports = {
+  testDir: './tests/e2e',
+  timeout: 30000,
+  retries: 0,
+  use: {
+    headless: true,
+  },
+};
+```
+
+6. Open the `package.json` file and add the necessary scripts for running the backend server and tests:
+
+```
+"scripts": {
+  "start": "node src/app.js",
+  "dev": "nodemon src/app.js",
+  "test": "jest --verbose",
+  "test:watch": "jest --watch",
+  "test:unit": "jest --verbose --testPathPattern=unit",
+  "test:e2e": "NODE_ENV=test playwright test",
+  "test:coverage": "jest --coverage"
+}
+```
+
+7. To run the backend server, use the following command:
+
+```
+npm run dev
+```
+
+8. To run the tests, use the following commands:
+
+```
+npm test
+npm run test:coverage
+```

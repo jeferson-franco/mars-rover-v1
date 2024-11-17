@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../../app');
+const app = require('../../src/app');
 
 describe('API Input Validation', () => {
   it('should return error 400 when the input format is invalid', async () => {

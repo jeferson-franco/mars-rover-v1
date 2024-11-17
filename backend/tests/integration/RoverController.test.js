@@ -13,12 +13,28 @@ describe('Rover API Integration Tests', () => {
               position: '1 2 N',
               instructions: 'LMLMLMLMM',
             },
+            {
+              position: '3 3 E',
+              instructions: 'MMRMMRMRRM',
+            },
           ],
-          status: 'success',
         });
 
       expect(response.status).toBe(200);
-      expect(response.body.results[0].final).toBe('1 3 N');
+      expect(response.body).toEqual({
+        results: [
+          {
+            initial: '1 2 N',
+            instructions: 'LMLMLMLMM',
+            final: '1 3 N',
+          },
+          {
+            initial: '3 3 E',
+            instructions: 'MMRMMRMRRM',
+            final: '5 1 E',
+          },
+        ],
+      });
     });
 
     it('should handle grid boundaries', async () => {
@@ -35,6 +51,15 @@ describe('Rover API Integration Tests', () => {
         });
 
       expect(response.status).toBe(400);
+      expect(response.body).toEqual({
+        results: [
+          {
+            initial: '1 2 N',
+            instructions: 'MMMMMMMMMM',
+            error: 'Movement would place rover outside plateau',
+          },
+        ],
+      });
     });
   });
 });

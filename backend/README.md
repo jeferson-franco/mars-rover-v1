@@ -78,6 +78,8 @@ Contributions are welcome! Please follow the guidelines in the main README.
 
 ## DIY
 
+To set up the Mars Rover Mission Control System backend from scratch, follow these steps to install the required dependencies:
+
 1. Make sure you have Node.js (v14 or higher) and npm (v6 or higher) installed on your machine. You can check the installed versions by running:
 
 ```
@@ -104,7 +106,7 @@ npm init -y
 npm install express
 npm install cors
 npm install dotenv
-npm install nodemon
+npm install nodemon --save-dev
 npm install jest --save-dev
 npm install supertest --save-dev
 npm install playwright --save-dev
@@ -129,7 +131,21 @@ backend/
 └── Dockerfile
 ```
 
-> My jest.config.js is like this (can vary):
+6. Open the `package.json` file and add the necessary scripts for running the backend server and tests:
+
+```
+"scripts": {
+  "start": "node src/app.js",
+  "dev": "nodemon src/app.js",
+  "test": "jest --verbose",
+  "test:watch": "jest --watch",
+  "test:unit": "jest --verbose --testPathPattern=unit",
+  "test:e2e": "NODE_ENV=test playwright test",
+  "test:coverage": "jest --coverage"
+}
+```
+
+7. Create a `jest.config.js` file in the backend directory with the following content:
 
 ```
 module.exports = {
@@ -153,7 +169,7 @@ module.exports = {
 };
 ```
 
-> My playwright.config.js is like this (can vary):
+8. Create a `playwright.config.js` file in the backend directory with the following content:
 
 ```
 module.exports = {
@@ -166,29 +182,19 @@ module.exports = {
 };
 ```
 
-6. Open the `package.json` file and add the necessary scripts for running the backend server and tests:
-
-```
-"scripts": {
-  "start": "node src/app.js",
-  "dev": "nodemon src/app.js",
-  "test": "jest --verbose",
-  "test:watch": "jest --watch",
-  "test:unit": "jest --verbose --testPathPattern=unit",
-  "test:e2e": "NODE_ENV=test playwright test",
-  "test:coverage": "jest --coverage"
-}
-```
-
-7. To run the backend server, use the following command:
+9. To run the backend server, use the following command:
 
 ```
 npm run dev
 ```
 
-8. To run the tests, use the following commands:
+10. To run the tests, use the following commands:
 
 ```
 npm test
 npm run test:coverage
 ```
+
+With these steps, you should have the initial dependencies installed and the project structure set up for the Mars Rover Mission Control System backend. You can now proceed with implementing the backend functionality and writing tests.
+
+Remember to configure any necessary environment variables, such as database connection URLs or API keys, in a `.env` file or through the appropriate means based on your project's requirements.
